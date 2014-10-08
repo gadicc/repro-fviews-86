@@ -1,0 +1,35 @@
+<head>
+  <title>repro-fviews-86</title>
+</head>
+
+<body>
+</body>
+
+<template name="famousInit">
+  {{!-- note that we have the HeaderFooterLayout fill the entire page --}}
+  {{#HeaderFooterLayout size="[undefined,undefined]" headerSize="64" footerSize="44"}}
+
+    {{!-- headerSize above is 64px, surface below has height 44px but is translated 20px down --}}
+    {{!-- note also that we've translated the z-index to 10 to keep it in front --}}
+    {{#Surface target="header" size="[undefined,44]" translate="[0,20,10]" class="red-bg"}}
+      Header
+    {{/Surface}}
+
+    {{!-- Note, if the View always contains only a Scrollview, we can use that directly --}}
+    {{#Scrollview target="content" size="[undefined,undefined]"}}
+
+      {{#famousEach contents}}
+        {{#Surface size="[undefined,50]"}}
+          <h2>Content {{this}}</h2>
+        {{/Surface}}
+      {{/famousEach}}
+
+    {{/Scrollview}}
+
+    {{#Surface target="footer" class="green-bg" }}
+      Footer
+    {{/Surface}}
+
+  {{/HeaderFooterLayout}}
+</template>
+
